@@ -7,6 +7,7 @@ pydantic
 joblib
 requests
 streamlit
-valtair
+altair
 attrs
+
 
