@@ -7,3 +7,5 @@ pydantic
 joblib
 requests
 streamlit
+valtair==4.2.2
+attrs==23.2.0
