@@ -42,11 +42,13 @@ if st.button("Calcular Precio Estimado 📊", use_container_width=True):
         "Longitude": longitude
     }
     
-    # 2. Enviar los datos a la API (Puerto 8080)
+    # 2. Enviar los datos a la API en Render
     try:
         # Mostramos un mensaje de carga mientras se conecta
         with st.spinner("Calculando predicción..."):
-            respuesta = requests.post("https://california-housing-ml-lyyo.onrender.com/predict", json=datos_json)_json)
+            # LÍNEA CORREGIDA ABAJO:
+            url_api = "https://california-housing-ml-lyyo.onrender.com/predict"
+            respuesta = requests.post(url_api, json=datos_json)
         
         # 3. Mostrar el resultado
         if respuesta.status_code == 200:
@@ -56,6 +58,6 @@ if st.button("Calcular Precio Estimado 📊", use_container_width=True):
         else:
             st.error("Error al procesar la predicción en el servidor. Revisa los datos ingresados.")
             
-    except requests.exceptions.ConnectionError:
-
-        st.error("❌ No se pudo conectar con la API. Asegúrese de que el backend (uvicorn) esté corriendo en el puerto 8080 en su otra ventana de CMD.")
+    except Exception as e:
+        st.error(f"❌ Error de conexión: {e}")
+        st.info("Nota: Si la API de Render estaba 'dormida', puede tardar hasta 1 minuto en despertar la primera vez.")
