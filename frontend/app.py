@@ -46,7 +46,7 @@ if st.button("Calcular Precio Estimado 📊", use_container_width=True):
     try:
         # Mostramos un mensaje de carga mientras se conecta
         with st.spinner("Calculando predicción..."):
-            respuesta = requests.post("http://127.0.0.1:8080/predict", json=datos_json)
+            respuesta = requests.post("https://california-housing-ml-lyyo.onrender.com/predict", json=datos_json)_json)
         
         # 3. Mostrar el resultado
         if respuesta.status_code == 200:
@@ -57,4 +57,5 @@ if st.button("Calcular Precio Estimado 📊", use_container_width=True):
             st.error("Error al procesar la predicción en el servidor. Revisa los datos ingresados.")
             
     except requests.exceptions.ConnectionError:
+
         st.error("❌ No se pudo conectar con la API. Asegúrese de que el backend (uvicorn) esté corriendo en el puerto 8080 en su otra ventana de CMD.")
